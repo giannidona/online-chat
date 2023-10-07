@@ -3,12 +3,12 @@ import handlebars from "express-handlebars";
 import mongoose from "mongoose";
 import { Server } from "socket.io";
 
-import homeRouter from "./routes/homeRouter.js";
-import chatRouter from "./routes/chatRouter.js";
-import profileRouter from "./routes/profileRouter.js";
+import viewsRouter from "./routes/viewsRouter.js";
 
 const app = express();
-const httpServer = app.listen(8080, () => console.log("live on 8080"));
+const httpServer = app.listen(8080, () =>
+  console.log("http://localhost:8080/login")
+);
 const socketServer = new Server(httpServer);
 
 // mongoose.connect();
@@ -21,6 +21,13 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", "./src/views");
 app.set("view engine", "handlebars");
 
-app.use(homeRouter);
-app.use(chatRouter);
-app.use(profileRouter);
+socketServer.on("connection", (socket) => {
+  console.log(`Se conectó el usuario con socket id: ${socket.id}`);
+
+  socket.on("mensaje", (data) => {
+    mensajes.push({ socketid: socket.id, mensaje: data.mensaje });
+    socketServer.emit("nuevo_contenido", mensajes);
+  });
+});
+
+app.use(viewsRouter);

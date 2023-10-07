@@ -1,0 +1,31 @@
+<h1 class="text-center mt-5 mb-5 font-bold">CHAT</h1>
+
+<div
+  class="2xl:w-1/4 xl:w-2/4 lg:w-2/5 md:w-2/4 sm:w-2/4 m-auto h-5/6 border-2 border-black rounded-lg"
+>
+  <div class="h-5/6 mt-auto">
+    <div id="container-msj" class="flex">
+      <div class="px-3 py-3">
+        <img src="http://localhost:8080/static/{{this.image}}" alt="" />
+      </div>
+      <div>
+        <span class="text-sm">{{this.name}}</span>
+        <p class="pt-none">{{this.message}}</p>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div id="container-input" class="flex justify-around">
+    <input
+      class="border-2 border-black rounded-full w-2/3 px-2 py-1"
+      type="text"
+      id="mjs"
+    />
+    <button
+      type="submit"
+      class="bg-black text-white rounded px-3 hover:bg-neutral-700"
+    >Send</button>
+  </div>
+</div>
+
+<script src="/static/js/chat.js"></script>
