@@ -1,25 +1,24 @@
 <h1 class="text-center mt-5 mb-5 font-bold">CHAT</h1>
 
 <div
-  class="2xl:w-1/4 xl:w-2/4 lg:w-2/5 md:w-2/4 sm:w-2/4 m-auto h-5/6 border-2 border-black rounded-lg"
+  class="2xl:w-1/4 xl:w-2/4 lg:w-2/5 md:w-2/4 sm:w-2/4 m-auto h-4/6 border-2 border-black rounded-lg"
 >
-  <div class="h-5/6 mt-auto">
-    <div id="container-msj" class="flex">
-      <div class="px-3 py-3">
-        <img src="http://localhost:8080/static/{{this.image}}" alt="" />
-      </div>
-      <div>
-        <span class="text-sm">{{this.name}}</span>
-        <p class="pt-none">{{this.message}}</p>
-      </div>
+  <div id="container-msj" class="flex">
+    <div>
+      <span id="username" class="text-sm hidden">{{this.username}}</span>
+      <p id="message-box" class="pt-none"></p>
     </div>
   </div>
-  <hr />
-  <div id="container-input" class="flex justify-around">
+</div>
+
+<div
+  class="2xl:w-1/4 xl:w-2/4 lg:w-2/5 md:w-2/4 sm:w-2/4 mt-5 m-auto border-2 border-black rounded-lg"
+>
+  <div id="container-input" class="flex justify-around my-2">
     <input
       class="border-2 border-black rounded-full w-2/3 px-2 py-1"
       type="text"
-      id="mjs"
+      id="message-input"
     />
     <button
       type="submit"
@@ -27,3 +26,6 @@
     >Send</button>
   </div>
 </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/chat.js"></script>

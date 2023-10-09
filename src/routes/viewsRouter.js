@@ -19,7 +19,8 @@ router.get("/login", async (req, res) => {
 });
 
 router.get("/chat", async (req, res) => {
-  res.render("chat");
+  const username = req.session.username;
+  res.render("chat", { username });
 });
 
 router.get("/profile", async (req, res) => {

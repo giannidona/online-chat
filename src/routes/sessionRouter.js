@@ -14,6 +14,7 @@ router.post("/register", uploader.single("file"), async (req, res) => {
     const image = req.file.originalname;
     const user = await userModel.create({ username, email, password, image });
     console.log(user);
+    res.redirect("/profile");
   } catch (error) {
     res.send(error);
   }

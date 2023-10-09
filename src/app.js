@@ -26,11 +26,10 @@ app.use(
     store: MongoStore.create({
       mongoUrl:
         "mongodb+srv://gianicraft:X5A0csVWV7y1SB9a@cluster0.bb8sucd.mongodb.net/?retryWrites=true&w=majority",
-      ttl: 100,
     }),
     secret: "aawd89n=02a-w92",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
   })
 );
 
@@ -40,11 +39,6 @@ app.set("view engine", "handlebars");
 
 socketServer.on("connection", (socket) => {
   console.log(`Se conectó el usuario con socket id: ${socket.id}`);
-
-  socket.on("mensaje", (data) => {
-    mensajes.push({ socketid: socket.id, mensaje: data.mensaje });
-    socketServer.emit("nuevo_contenido", mensajes);
-  });
 });
 
 app.use(sessionRouter);
