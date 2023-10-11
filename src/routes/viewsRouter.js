@@ -19,6 +19,9 @@ router.get("/login", async (req, res) => {
 });
 
 router.get("/chat", async (req, res) => {
+  if (!req.session.isLogged) {
+    return res.redirect("/login");
+  }
   const username = req.session.username;
   res.render("chat", { username });
 });

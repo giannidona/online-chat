@@ -9,25 +9,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageContent = messageInput.value.trim();
 
     if (messageContent !== "") {
-      // Obtener el nombre de usuario de la página
       const username = usernameElement.textContent;
 
-      // Enviar el mensaje al servidor a través de Socket.IO
-      socket.emit("sendMessage", { username, messageContent });
-
-      // Mostrar el mensaje junto con el nombre del usuario en el cuadro de mensajes
-      const messageDiv = document.createElement("div");
-      messageDiv.innerHTML = `<span class="text-sm">${username}</span><p class="pt-none">${messageContent}</p>`;
-      messageBox.appendChild(messageDiv);
-
-      messageInput.value = "";
+      socket.emit("message", { username, messageContent });
     }
   });
 
-  // Manejar la recepción de mensajes del servidor
-  socket.on("receiveMessage", ({ username, messageContent }) => {
+  socket.on("new_message", (data) => {
     const messageDiv = document.createElement("div");
-    messageDiv.innerHTML = `<span class="text-sm">${username}</span><p class="pt-none">${messageContent}</p>`;
+    messageDiv.innerHTML = `<span class="text-sm">${data.username}</span><p class="pt-none">${data.messageContent}</p>`;
     messageBox.appendChild(messageDiv);
   });
 });
