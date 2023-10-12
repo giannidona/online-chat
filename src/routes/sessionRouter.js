@@ -32,6 +32,7 @@ router.post("/login", async (req, res) => {
     req.session.username = user.username;
     req.session.email = user.email;
     req.session.image = user.image;
+    req.session.status = true;
     req.session.isLogged = true;
 
     res.redirect("/profile");

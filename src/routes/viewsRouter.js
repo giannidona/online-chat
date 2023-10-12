@@ -27,9 +27,18 @@ router.get("/chat", async (req, res) => {
 });
 
 router.get("/profile", async (req, res) => {
-  const { username, email, image } = req.session;
+  if (!req.session.isLogged) {
+    return res.redirect("/login");
+  }
 
-  res.render("profile", { username, email, image });
+  const { username, email, image, status } = req.session;
+
+  res.render("profile", { username, email, image, status });
+});
+
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/login");
 });
 
 export default router;
