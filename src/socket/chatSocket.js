@@ -3,7 +3,6 @@ const chatSocket = (socketServer) => {
     console.log("connected", socket.id);
     socket.on("message", (data) => {
       socketServer.emit("new_message", data);
-      console.log(data);
     });
   });
 };

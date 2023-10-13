@@ -22,8 +22,9 @@ router.get("/chat", async (req, res) => {
   if (!req.session.isLogged) {
     return res.redirect("/login");
   }
+  const image = req.session.image;
   const username = req.session.username;
-  res.render("chat", { username });
+  res.render("chat", { username, image });
 });
 
 router.get("/profile", async (req, res) => {
